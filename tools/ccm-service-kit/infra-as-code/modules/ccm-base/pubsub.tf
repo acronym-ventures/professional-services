@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_pubsub_topic" "ccm-trigger-pubsub" {
+    # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
     project = var.project_id
     name = var.ccm-trigger-pubsub-topic
 }
