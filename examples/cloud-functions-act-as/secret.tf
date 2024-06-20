@@ -15,6 +15,7 @@
  */
  
 resource "google_secret_manager_secret" "access-token-secret" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   secret_id = "access-token-secret"
   replication {
     user_managed {
