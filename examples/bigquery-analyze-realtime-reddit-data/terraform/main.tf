@@ -300,6 +300,7 @@ EOF
 }
 
 resource "google_storage_bucket" "app_bucket" {
+    # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
     name          = "${var.app_bucket}"
     location      = "${var.location}"
     force_destroy = true
