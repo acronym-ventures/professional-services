@@ -211,6 +211,7 @@ resource "google_cloud_scheduler_job" "scheduler_job" {
 }
 
 resource "google_cloudfunctions_function" "perspective_api" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   depends_on            = ["google_project_service.commentanalyzerapi", "google_pubsub_topic.stt_topic"]
   name                  = "perspective_api"
   region                = var.cloud_functions_region
