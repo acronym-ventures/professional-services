@@ -25,6 +25,7 @@ data "google_service_account" "cloud_run_sa" {
 }
 
 resource "google_secret_manager_secret" "secret" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   secret_id = var.vCenter-password-secret
   replication {
     auto {}
