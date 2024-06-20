@@ -30,6 +30,7 @@ resource "random_string" "bucket_suffix" {
 
 
 resource "google_storage_bucket" "bucket" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   project     = var.project_id
   location    = var.location
   name        = "cf-sample-bucket-${random_string.bucket_suffix.id}"
