@@ -23,6 +23,7 @@ resource "google_storage_bucket" "cloud-function-source-bucket" {
 }
 
 resource "google_storage_bucket" "dataproc-cluster-analysis-bucket" {
+    # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
     name     = "${var.project_id}-dataproc-cluster-analysis"
     location = var.region
 }
