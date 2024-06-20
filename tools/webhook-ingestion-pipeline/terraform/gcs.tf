@@ -14,6 +14,7 @@
 
 
 resource "google_storage_bucket" "webhook_gcs_stage" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   project       = var.project_id
   name          = "${var.project_id}-${var.gcs_bucket_prefix}"
   location      = "US"
