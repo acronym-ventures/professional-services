@@ -81,6 +81,7 @@ resource "google_storage_bucket" "transcription_bucket" {
 
 # Create GCS Bucket to hold toxicity output files
 resource "google_storage_bucket" "output_bucket" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   name = "output-files-${random_id.rand.hex}"
 }
 
