@@ -127,6 +127,7 @@ data "archive_file" "send_stt" {
 
 # Store STT source code
 resource "google_storage_bucket" "function_source_code" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   name = "source-code-${random_id.rand.hex}"
 }
 
