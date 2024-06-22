@@ -20,6 +20,7 @@
  * maintain via terraform.
 */
 resource "google_spanner_instance" "spanner-instance-data" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   config       = "regional-${var.region}"
   name         = var.spanner_instance_name_for_userdata
   display_name = var.spanner_instance_name_for_userdata
