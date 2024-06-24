@@ -54,6 +54,7 @@ resource "google_project_iam_binding" "sa_binding" {
 }
 
 resource "google_storage_bucket" "json_bucket" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name          = var.storage_bucket
   project       = module.project-services.project_id
   location      = var.location
