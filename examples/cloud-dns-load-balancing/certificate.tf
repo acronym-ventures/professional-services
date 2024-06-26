@@ -60,6 +60,7 @@ resource "google_certificate_manager_certificate_issuance_config" "issuanceconfi
   key_algorithm = "ECDSA_P256"
 }
 resource "google_certificate_manager_certificate" "ccm-cert" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   name        = "ccm-cert"
   scope       = "ALL_REGIONS"
   managed {
