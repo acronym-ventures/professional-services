@@ -300,6 +300,7 @@ EOF
 }
 
 resource "google_storage_bucket" "app_bucket" {
+    # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
     # Drata: Set [google_storage_bucket.versioning.enabled] to true to enable infrastructure versioning and prevent accidental deletions and overrides
     name          = "${var.app_bucket}"
     location      = "${var.location}"
