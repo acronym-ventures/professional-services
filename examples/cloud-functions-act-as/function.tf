@@ -30,6 +30,7 @@ resource "random_string" "bucket_suffix" {
 
 
 resource "google_storage_bucket" "bucket" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   # Drata: Set [google_storage_bucket.versioning.enabled] to true to enable infrastructure versioning and prevent accidental deletions and overrides
   project     = var.project_id
   location    = var.location
