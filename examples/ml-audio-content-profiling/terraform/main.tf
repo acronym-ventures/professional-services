@@ -177,6 +177,7 @@ resource "google_cloudfunctions_function" "send_stt_api" {
 }
 
 resource "google_cloudfunctions_function" "read_stt_api" {
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to ALL_TRAFFIC so that all outgoing traffic is routed through your VPC network
   depends_on  = ["google_project_service.speechapi"]
   name        = "read_stt_api"
   region      = var.cloud_functions_region
