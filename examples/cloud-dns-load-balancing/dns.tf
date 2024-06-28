@@ -15,6 +15,7 @@
  */
 
 resource "google_dns_managed_zone" "hello_zone" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   name        = "hello-zone"
   dns_name    = "hello.zone."
   description = "Example private DNS zone"
