@@ -258,6 +258,7 @@ data "local_file" "dashboard_view_sql" {
 
 
 resource "google_bigquery_table" "dashboard_view" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   dataset_id = local.config.export["bigquery"]["dataset"]
   table_id   = "dashboard_view"
 
