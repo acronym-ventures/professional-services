@@ -33,6 +33,7 @@ resource "google_bigquery_table" "vm-table" {
 }
 
 resource "google_bigquery_table" "datastore-table" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.default.dataset_id
   table_id   = var.datastore-table-name
 }
