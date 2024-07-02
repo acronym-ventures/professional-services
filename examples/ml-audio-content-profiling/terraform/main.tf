@@ -71,6 +71,7 @@ resource "google_storage_bucket" "processed_audio_bucket" {
 
 # Create GCS Bucket to hold audio files that failed after going through STT API.
 resource "google_storage_bucket" "error_audio_bucket" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name = "error-audio-files-${random_id.rand.hex}"
 }
 
