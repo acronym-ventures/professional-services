@@ -428,6 +428,7 @@ resource "google_pubsub_subscription" "thresholds_sub" {
 
 
 resource "google_pubsub_subscription" "bigquery_sub" {
+  # Drata: Set [configId] to ensure that organization-wide label conventions are followed.
   name  = "bigquery_sub"
   topic = resource.google_pubsub_topic.bigquery.name
 
