@@ -165,7 +165,7 @@ resource "google_cloudfunctions_function_iam_member" "invoker-scanProject" {
 resource "google_cloudfunctions_function" "function-notificationProject" {
   name        = var.cloud_function_notification_project
   description = var.cloud_function_notification_project_desc
-  runtime     = "java11"
+  runtime     = "java21"
 
   available_memory_mb   = var.cloud_function_notification_project_memory
   source_archive_bucket = var.source_code_bucket_name
