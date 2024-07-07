@@ -76,6 +76,7 @@ resource "google_storage_bucket" "error_audio_bucket" {
 
 # Create GCS Bucket to hold transcription output files
 resource "google_storage_bucket" "transcription_bucket" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name = "transcription-files-${random_id.rand.hex}"
 }
 
