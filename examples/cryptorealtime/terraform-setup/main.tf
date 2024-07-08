@@ -91,6 +91,7 @@ output "ip" {
 
 
 resource "google_storage_bucket" "cryptorealtime-demo-staging" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name = "${var.bucket_name}"
   location = "US"
   force_destroy = true
