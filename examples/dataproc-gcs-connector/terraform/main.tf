@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "init_actions" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name     = "gcs-connector-init_actions"
   location = var.region
