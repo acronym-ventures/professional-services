@@ -40,6 +40,7 @@ resource "google_storage_bucket_object" "cloud_function" {
 
 # GCS bucket to store the clouf function code
 resource "google_storage_bucket" "cloud_function" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to true to enable infrastructure versioning and prevent accidental deletions and overrides
   # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name                        = "${google_project.demo_project.project_id}-cf${local.suffix_dash}"
