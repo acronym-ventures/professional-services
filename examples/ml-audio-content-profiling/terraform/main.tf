@@ -91,6 +91,7 @@ resource "google_pubsub_topic" "stt_topic" {
 }
 
 resource "google_pubsub_subscription" "pull_stt_ids" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   name       = var.stt_queue_subscription_name
   depends_on = ["google_project_service.pubsubapi"]
   topic      = google_pubsub_topic.stt_topic.name
