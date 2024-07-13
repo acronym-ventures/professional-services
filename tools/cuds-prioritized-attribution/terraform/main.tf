@@ -94,6 +94,7 @@ resource "google_bigquery_dataset" "corrected_dataset" {
 
 # Create bucket for Composer temporary file store
 resource "google_storage_bucket" "commitment_file_store" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name     = "${var.project_id}-cud-correction-commitment-data"
   location = var.billing_export_location
 }
