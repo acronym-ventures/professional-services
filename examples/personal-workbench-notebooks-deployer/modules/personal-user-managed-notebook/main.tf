@@ -39,6 +39,7 @@ resource "google_project_iam_binding" "sa_binding" {
 }
 
 resource "google_storage_bucket" "personal_dataproc_notebooks_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
   name                     = var.personal_dataproc_notebooks_bucket_name
   location                 = var.region
   project                  = var.project_id
