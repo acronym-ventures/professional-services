@@ -69,6 +69,7 @@ resource "ipam_ip_range" "services_ranges" {
 }
 
 resource "google_compute_subnetwork" "services-subnet" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "gke-services"
   ip_cidr_range = ipam_ip_range.services_ranges.cidr
   region        = "us-central1"
