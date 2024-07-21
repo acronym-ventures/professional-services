@@ -163,6 +163,7 @@ resource "google_cloudfunctions_function_iam_member" "invoker-scanProject" {
 
 # Third cloud function to send notification
 resource "google_cloudfunctions_function" "function-notificationProject" {
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to ALL_TRAFFIC so that all outgoing traffic is routed through your VPC network
   # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name        = var.cloud_function_notification_project
   description = var.cloud_function_notification_project_desc
