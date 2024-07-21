@@ -168,6 +168,7 @@ resource "google_cloudfunctions_function" "function_1" {
 
 # Function 2 which will send email with link to GCS file
 resource "google_storage_bucket" "function_bucket_2" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
   name    = var.function_bucket_2
   project = module.project-services.project_id
 }
