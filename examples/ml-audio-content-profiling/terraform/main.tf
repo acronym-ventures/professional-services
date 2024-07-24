@@ -61,6 +61,7 @@ resource "random_id" "rand" {
 # Create GCS Buckets
 # Create GCS Bucket to hold audio files on upload before they are processed by pipeline.
 resource "google_storage_bucket" "staging_audio_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
   name = "staging-audio-files-${random_id.rand.hex}"
 }
 
