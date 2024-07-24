@@ -123,6 +123,7 @@ resource "google_project_iam_binding" "log_sink_writer" {
 
 # Function 1 which will export query results to GCS
 resource "google_storage_bucket" "function_bucket_1" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
   name    = var.function_bucket_1
   project = module.project-services.project_id
