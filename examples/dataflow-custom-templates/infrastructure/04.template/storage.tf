@@ -14,6 +14,7 @@
 
 // A storage bucket reserved for templates
 resource "google_storage_bucket" "dataflow_templates" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   location                    = "us"
   name                        = "dataflow-templates-${random_string.dataflow_templates_postfix.result}"
   uniform_bucket_level_access = true
