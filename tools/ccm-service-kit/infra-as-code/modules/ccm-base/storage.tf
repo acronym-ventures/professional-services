@@ -21,6 +21,7 @@ resource "google_storage_bucket" "main" {
 }
 
 resource "google_storage_bucket" "composer-bucket" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name                        = "ccm-composer-${random_string.random_id.result}"
   storage_class               = "REGIONAL" 
