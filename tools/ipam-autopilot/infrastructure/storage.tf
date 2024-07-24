@@ -59,6 +59,7 @@ resource "random_string" "random" {
   special = false
 }
 resource "google_storage_bucket" "provider" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name          = "ipam_provider_${random_string.random.result}"
   location      = "EU"
   force_destroy = true
