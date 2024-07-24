@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "main" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   name                        = "ccm-${random_string.random_id.result}"
   storage_class               = "REGIONAL" 
   project                     = var.project_id
