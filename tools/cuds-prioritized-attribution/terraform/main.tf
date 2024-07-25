@@ -94,6 +94,7 @@ resource "google_bigquery_dataset" "corrected_dataset" {
 
 # Create bucket for Composer temporary file store
 resource "google_storage_bucket" "commitment_file_store" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to true to enable infrastructure versioning and prevent accidental deletions and overrides
   # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
