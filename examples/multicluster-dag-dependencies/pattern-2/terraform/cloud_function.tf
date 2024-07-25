@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "bucket-4-trigger-dag-cloud-fxn" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
   project = var.project_id
   name     = "trigger-dag-cloud-fxn"
   location = var.region
