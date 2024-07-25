@@ -76,6 +76,7 @@ resource "google_storage_bucket" "error_audio_bucket" {
 
 # Create GCS Bucket to hold transcription output files
 resource "google_storage_bucket" "transcription_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
   name = "transcription-files-${random_id.rand.hex}"
 }
 
