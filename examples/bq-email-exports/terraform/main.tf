@@ -185,6 +185,7 @@ resource "google_storage_bucket_object" "archive_2" {
 }
 
 resource "google_cloudfunctions_function" "function_2" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to ALLOW_INTERNAL_AND_GCLB. It is preferred that cloud functions are exposed through Google load balancer
   # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to ALL_TRAFFIC so that all outgoing traffic is routed through your VPC network
   # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name    = var.email_results_function_name
