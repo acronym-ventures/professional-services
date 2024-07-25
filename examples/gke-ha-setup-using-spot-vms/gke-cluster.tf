@@ -65,6 +65,7 @@ resource "google_container_node_pool" "spot_pool" {
 
 # On-demand pool
 resource "google_container_node_pool" "on_demand_pool" {
+  # Drata: Set [google_container_node_pool.management.auto_repair] to true for automatic repairs to maintain healthy instances
   name       = "on-demand-node-pool"
   location   = var.zone
   project    = var.project_id
