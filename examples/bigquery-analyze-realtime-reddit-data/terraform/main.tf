@@ -300,6 +300,7 @@ EOF
 }
 
 resource "google_storage_bucket" "app_bucket" {
+    # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
     name          = "${var.app_bucket}"
     location      = "${var.location}"
     force_destroy = true
