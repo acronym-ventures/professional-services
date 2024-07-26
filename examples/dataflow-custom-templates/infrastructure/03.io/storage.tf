@@ -14,6 +14,7 @@
 
 // Provision storage bucket reserved for templates
 resource "google_storage_bucket" "source" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   location                    = "us"
   name                        = "${var.source_bucket_prefix}-${random_string.source_postfix.result}"
