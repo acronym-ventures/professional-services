@@ -127,6 +127,7 @@ data "archive_file" "send_stt" {
 
 # Store STT source code
 resource "google_storage_bucket" "function_source_code" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to 2678400 to ensure sensitive data is only available when necessary
   # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to true to configure resource access using IAM policies
   name = "source-code-${random_id.rand.hex}"
 }
