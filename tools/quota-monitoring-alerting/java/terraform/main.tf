@@ -57,6 +57,7 @@ module "project-services" {
 
 # Create Pub/Sub topic to list projects in the parent node
 resource "google_pubsub_topic" "topic_alert_project_id" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name       = var.topic_alert_project_id
   depends_on = [module.project-services]
 }
