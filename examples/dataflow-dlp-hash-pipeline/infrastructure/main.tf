@@ -73,6 +73,7 @@ resource "google_secret_manager_secret" "hash_key_secret" {
 }
 
 resource "google_pubsub_topic" "input_topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   project = var.project
   name    = var.input_topic
 
