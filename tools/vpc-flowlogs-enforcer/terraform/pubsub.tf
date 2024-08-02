@@ -6,6 +6,7 @@
 
 # Create the Pub/Sub topic where the subnet change logs will be sent.
 resource "google_pubsub_topic" "subnet_change" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   project = google_project.demo_project.project_id
   name    = "subnet-changes"
 }
