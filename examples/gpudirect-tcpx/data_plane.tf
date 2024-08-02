@@ -34,6 +34,7 @@ resource "google_compute_network" "gpu_data_plane" {
 }
 
 resource "google_compute_subnetwork" "gpu_data_plane" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   for_each      = local.data_planes
   project       = var.project_id
   name          = "gpu-data-plane-${each.key}-${random_id.gpu_data_plane.hex}"
