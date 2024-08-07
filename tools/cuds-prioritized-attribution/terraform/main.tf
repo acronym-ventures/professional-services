@@ -135,6 +135,7 @@ resource "google_composer_environment" "env" {
 
 # Upload dependencies folder to DAG folder in Composer Bucket
 resource "google_storage_bucket_object" "dag_init_upload" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   for_each = fileset(var.composer_dir_path, "**")
   bucket = element(split("/dags", element(split("gs://", google_composer_environment.env.config.0.dag_gcs_prefix), 1)), 0)
   name   = "dags/composer/${each.value}"
