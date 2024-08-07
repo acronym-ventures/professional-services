@@ -32,6 +32,7 @@ resource "google_compute_subnetwork" "gpu_management_plane" {
 }
 
 resource "google_compute_firewall" "gpu_management_plane-allow-all" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name      = "gpu-management-firewall-allow-all"
   project   = var.project_id
   network   = google_compute_network.gpu_management_plane.name
