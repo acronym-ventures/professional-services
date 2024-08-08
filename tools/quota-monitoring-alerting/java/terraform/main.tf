@@ -63,6 +63,7 @@ resource "google_pubsub_topic" "topic_alert_project_id" {
 
 # Create Pub/Sub topic to send notification
 resource "google_pubsub_topic" "topic_alert_notification" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name       = var.topic_alert_notification
   depends_on = [module.project-services]
 }
