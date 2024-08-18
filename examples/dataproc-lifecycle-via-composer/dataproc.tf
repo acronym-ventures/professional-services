@@ -52,6 +52,7 @@ module "dataproc-service-account" {
 }
 
 resource "google_storage_bucket_object" "dataproc_job_files" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   for_each = fileset(path.module, "jobs/*")
   name   = each.value
   source = each.value
