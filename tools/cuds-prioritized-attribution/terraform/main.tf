@@ -79,6 +79,7 @@ data "google_client_openid_userinfo" "me" {
 
 # Grant BigQuery Permissions for Service Account on Corrected Dataset
 resource "google_bigquery_dataset" "corrected_dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = var.corrected_dataset_id
   location   = var.billing_export_location
   depends_on = [google_project_service.bqapi]
