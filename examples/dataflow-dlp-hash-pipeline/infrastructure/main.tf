@@ -80,6 +80,7 @@ resource "google_pubsub_topic" "input_topic" {
 }
 
 resource "google_pubsub_subscription" "input_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   project = var.project
   name    = "${var.input_topic}-subscription"
   topic   = google_pubsub_topic.input_topic.name
