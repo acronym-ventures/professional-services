@@ -125,6 +125,7 @@ resource "google_cloudfunctions_function_iam_member" "invoker-listProjects" {
 
 # Second cloud function to scan project
 resource "google_cloudfunctions_function" "function-scanProject" {
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name        = var.cloud_function_scan_project
   description = var.cloud_function_scan_project_desc
   runtime     = "java21"
