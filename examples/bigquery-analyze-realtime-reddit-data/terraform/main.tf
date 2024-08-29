@@ -145,6 +145,7 @@ resource "google_bigquery_dataset" "comments" {
 }
 
 resource "google_bigquery_table" "stream_raw" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.comments.dataset_id
   table_id   = "${var.bq_table_name}"
   deletion_protection = false
