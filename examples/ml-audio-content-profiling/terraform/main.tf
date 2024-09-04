@@ -215,7 +215,7 @@ resource "google_cloudfunctions_function" "perspective_api" {
   name                  = "perspective_api"
   region                = var.cloud_functions_region
   entry_point           = "main"
-  runtime               = "python37"
+  runtime               = "python312"
   source_archive_bucket = google_storage_bucket.function_source_code.name
   source_archive_object = google_storage_bucket_object.perspective_code.name
   timeout               = "540"
