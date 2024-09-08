@@ -87,6 +87,7 @@ resource "google_bigquery_routine" "main" {
 }
 
 resource "google_bigquery_table" "main" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id    = var.dataset_name
   friendly_name = "Interconnect Traffic Report"
   table_id      = "interconnect_traffic_report"
