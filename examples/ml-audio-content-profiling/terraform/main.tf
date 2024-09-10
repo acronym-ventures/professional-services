@@ -177,6 +177,7 @@ resource "google_cloudfunctions_function" "send_stt_api" {
 }
 
 resource "google_cloudfunctions_function" "read_stt_api" {
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on  = ["google_project_service.speechapi"]
   name        = "read_stt_api"
