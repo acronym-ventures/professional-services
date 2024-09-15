@@ -58,6 +58,7 @@ resource "google_pubsub_topic_iam_member" "cloud_asset_writer" {
 
 # The topic where the resource change notifications will be sent.
 resource "google_pubsub_topic" "feed_output" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   project = var.project_id
   name    = var.feed_id
   depends_on = [
