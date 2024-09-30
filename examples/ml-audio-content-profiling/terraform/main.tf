@@ -229,6 +229,7 @@ resource "google_cloudfunctions_function" "perspective_api" {
 }
 
 resource "google_cloudfunctions_function" "nlp_api" {
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on            = ["google_project_service.nlpapi"]
   name                  = "nlp_api"
   region                = var.cloud_functions_region
