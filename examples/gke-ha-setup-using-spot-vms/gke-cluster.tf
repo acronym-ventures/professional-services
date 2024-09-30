@@ -31,6 +31,7 @@ resource "google_container_cluster" "cluster" {
 
 # Spot pool
 resource "google_container_node_pool" "spot_pool" {
+  # Drata: Set [google_container_node_pool.management.auto_repair] to [true] for automatic repairs to maintain healthy instances
   provider = google-beta
 
   name       = "spot-node-pool"
