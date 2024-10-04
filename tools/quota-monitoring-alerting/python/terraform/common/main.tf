@@ -374,6 +374,7 @@ resource "google_pubsub_topic" "bigquery" {
 
 
 resource "google_pubsub_subscription" "metrics_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   name  = "metrics_sub"
   topic = resource.google_pubsub_topic.metrics.name
 
