@@ -29,6 +29,7 @@ resource "google_compute_subnetwork" "default" {
 
 // Provision firewall rule for internal network traffic only
 resource "google_compute_firewall" "default" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name    = "allow-data-pipelines-internal"
   network = google_compute_network.default.name
 
