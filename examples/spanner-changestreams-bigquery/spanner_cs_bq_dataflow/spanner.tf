@@ -33,6 +33,7 @@ resource "google_spanner_instance" "spanner-instance-data" {
  * connector metadata table.
 */
 resource "google_spanner_instance" "spanner-instance-metadata" {
+  # Drata: Configure [google_spanner_instance.labels] to ensure that organization-wide label conventions are followed.
   config       = "regional-${var.region}"
   name         = var.spanner_instance_name_for_metadata
   display_name = var.spanner_instance_name_for_metadata
