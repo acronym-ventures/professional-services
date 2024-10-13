@@ -4,6 +4,7 @@
  * agreement with Google.  
  */
 resource "google_cloudfunctions_function" "net_logs" {
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   project     = google_project.demo_project.project_id
   name        = "net_logs"
   entry_point = "main"
