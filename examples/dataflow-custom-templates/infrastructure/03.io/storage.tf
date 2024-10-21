@@ -14,6 +14,7 @@
 
 // Provision storage bucket reserved for templates
 resource "google_storage_bucket" "source" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   location                    = "us"
   name                        = "${var.source_bucket_prefix}-${random_string.source_postfix.result}"
   uniform_bucket_level_access = true
