@@ -200,6 +200,7 @@ resource "google_cloudfunctions_function_iam_member" "invoker-notificationProjec
 
 # BigQuery Dataset
 resource "google_bigquery_dataset" "dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id                      = var.big_query_dataset_id
   friendly_name                   = var.big_query_dataset_id
   description                     = var.big_query_dataset_desc
