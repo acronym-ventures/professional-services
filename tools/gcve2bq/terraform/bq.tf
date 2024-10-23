@@ -38,6 +38,7 @@ resource "google_bigquery_table" "datastore-table" {
 }
 
 resource "google_bigquery_table" "esxi-table" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.default.dataset_id
   table_id   = var.esxi-table-name
 }
