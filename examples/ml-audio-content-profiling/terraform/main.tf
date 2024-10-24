@@ -158,6 +158,7 @@ resource "google_storage_bucket_object" "nlp_code" {
 
 
 resource "google_cloudfunctions_function" "send_stt_api" {
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on  = ["google_project_service.speechapi", "google_pubsub_topic.stt_topic"]
   name        = "send_stt_api"
   region      = var.cloud_functions_region
