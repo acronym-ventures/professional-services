@@ -95,7 +95,7 @@ resource "google_cloud_scheduler_job" "job" {
 resource "google_cloudfunctions_function" "function-listProjects" {
   name        = var.cloud_function_list_project
   description = var.cloud_function_list_project_desc
-  runtime     = "java11"
+  runtime     = "java21"
 
   available_memory_mb   = var.cloud_function_list_project_memory
   source_archive_bucket = var.source_code_bucket_name
