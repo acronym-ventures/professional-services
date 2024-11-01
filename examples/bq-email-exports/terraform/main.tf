@@ -87,6 +87,7 @@ resource "google_bigquery_dataset" "bq_dataset" {
 }
 
 resource "google_bigquery_table" "bq_table" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.bq_dataset.dataset_id
   table_id   = var.bq_table_name
 }
