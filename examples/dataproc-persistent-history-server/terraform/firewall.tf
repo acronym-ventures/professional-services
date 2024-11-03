@@ -15,6 +15,7 @@
  */
 
 resource "google_compute_firewall" "allow-ssh" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   project = "${var.project}"
   name    = "${var.network}-allow-ssh"
   network = "${module.vpc.network_name}"
