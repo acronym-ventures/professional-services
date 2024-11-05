@@ -203,6 +203,7 @@ resource "google_storage_bucket_object" "static_init_actions" {
 }
 
 resource "google_storage_bucket_object" "rendered_init_actions" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   for_each = local.templated_init_actions
 
   name = "init-actions/${each.key}.sh"
