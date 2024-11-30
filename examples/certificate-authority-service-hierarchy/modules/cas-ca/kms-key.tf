@@ -42,6 +42,7 @@ resource "google_kms_key_ring" "ca_keyring" {
 }
 
 resource "google_kms_crypto_key" "ca_key" {
+  # Drata: Configure [google_kms_crypto_key.labels] to ensure that organization-wide label conventions are followed.
   name            = "ca-${random_string.keyring_suffix.keepers.env}-${random_string.key_suffix.result}"
   key_ring        = google_kms_key_ring.ca_keyring.id
   purpose         = "ASYMMETRIC_SIGN"
