@@ -102,6 +102,7 @@ EOT
 }
 
 resource "google_bigquery_table" "report" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   for_each = { for e in setproduct(["current", "previous"], ["day", "week", "month"]) : format("%s-%s", e[0], e[1]) => e }
   dataset_id    = var.dataset_name
   friendly_name = "Top Talkers Report for the ${each.value[0]} month grouped by ${each.value[1]}"
