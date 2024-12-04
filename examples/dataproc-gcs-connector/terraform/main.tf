@@ -19,6 +19,7 @@ resource "google_storage_bucket" "init_actions" {
 }
 
 resource "google_storage_bucket_object" "gcs_connector_jar" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name   = "gcs-connector-${var.hadoop_version}-shaded.jar"
   source = "../hadoop-connectors/gcs/target/gcs-connector-${var.hadoop_version}-SNAPSHOT-shaded.jar"
   bucket = "gcs-connector-init_actions"
