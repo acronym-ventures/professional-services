@@ -20,6 +20,7 @@ provider "google" {
 }
 
 resource "google_bigquery_dataset" "default" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id                  = var.dataset-name
   friendly_name               = "GCVE Utilization"
   description                 = "Dataset to host data for GCVE utilization data"
