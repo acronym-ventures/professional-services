@@ -93,6 +93,7 @@ resource "google_cloud_scheduler_job" "job" {
 
 # cloud function to list projects
 resource "google_cloudfunctions_function" "function-listProjects" {
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
   name        = var.cloud_function_list_project
   description = var.cloud_function_list_project_desc
   runtime     = "java21"
