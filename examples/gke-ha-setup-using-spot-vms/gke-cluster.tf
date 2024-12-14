@@ -65,6 +65,7 @@ resource "google_container_node_pool" "spot_pool" {
 
 # On-demand pool
 resource "google_container_node_pool" "on_demand_pool" {
+  # Drata: Set [google_container_node_pool.management.auto_repair] to [true] for automatic repairs to maintain healthy instances
   # Drata: Set [google_container_node_pool.management.auto_upgrade] to true to automatically update nodes in the cluster to the latest control plane version
   name       = "on-demand-node-pool"
   location   = var.zone
