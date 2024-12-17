@@ -182,6 +182,7 @@ resource "google_compute_firewall" "fw-iap" {
 
 # allow http from proxy subnet to backends
 resource "google_compute_firewall" "fw-ilb-to-backends" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   provider      = google-beta
   project       = var.project_id
   name          = "allow-ilb-to-backends"
