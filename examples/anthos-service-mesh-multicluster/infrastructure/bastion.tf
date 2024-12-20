@@ -15,6 +15,7 @@
  */
 
 resource "google_compute_instance" "bastion-instance" {
+  # Drata: Configure [google_compute_instance.labels] to ensure that organization-wide label conventions are followed.
   project       = var.project_id
   name          = "bastion-instance"
   machine_type  = "n1-standard-2"
