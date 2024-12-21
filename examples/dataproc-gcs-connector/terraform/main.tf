@@ -78,6 +78,7 @@ resource "google_dataproc_cluster" "dataproc-cluster" {
 }
 
 resource "google_compute_firewall" "dataproc_internal" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name    = "dataproc-allow-internal"
   project = var.project_id
   network = google_compute_network.ingestion.self_link
