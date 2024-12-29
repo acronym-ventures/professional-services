@@ -25,6 +25,7 @@ resource "google_storage_bucket_object" "gcs_connector_jar" {
 }
 
 resource "google_storage_bucket_object" "init_script" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name   = "dataproc-init-script.sh"
   source = "../connectors.sh"
   bucket = "gcs-connector-init_actions"
