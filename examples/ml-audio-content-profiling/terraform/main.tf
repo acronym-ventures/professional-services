@@ -61,6 +61,7 @@ resource "random_id" "rand" {
 # Create GCS Buckets
 # Create GCS Bucket to hold audio files on upload before they are processed by pipeline.
 resource "google_storage_bucket" "staging_audio_bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name = "staging-audio-files-${random_id.rand.hex}"
 }
