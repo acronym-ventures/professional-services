@@ -15,6 +15,7 @@
  */
 
 resource "google_storage_bucket" "history-bucket" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   project       = "${var.project}"
   name          = "${var.history-bucket}"
   storage_class = "REGIONAL"
