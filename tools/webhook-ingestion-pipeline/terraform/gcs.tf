@@ -14,6 +14,7 @@
 
 
 resource "google_storage_bucket" "webhook_gcs_stage" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   project       = var.project_id
   name          = "${var.project_id}-${var.gcs_bucket_prefix}"
