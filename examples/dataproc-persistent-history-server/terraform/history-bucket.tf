@@ -15,6 +15,7 @@
  */
 
 resource "google_storage_bucket" "history-bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   project       = "${var.project}"
   name          = "${var.history-bucket}"
