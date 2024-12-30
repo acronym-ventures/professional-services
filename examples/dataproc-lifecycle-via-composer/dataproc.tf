@@ -52,6 +52,7 @@ module "dataproc-service-account" {
 }
 
 resource "google_storage_bucket_object" "dataproc_job_files" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   for_each = fileset(path.module, "jobs/*")
   name   = each.value
   source = each.value
