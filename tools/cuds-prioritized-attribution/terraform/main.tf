@@ -94,6 +94,7 @@ resource "google_bigquery_dataset" "corrected_dataset" {
 
 # Create bucket for Composer temporary file store
 resource "google_storage_bucket" "commitment_file_store" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name     = "${var.project_id}-cud-correction-commitment-data"
   location = var.billing_export_location
 }
