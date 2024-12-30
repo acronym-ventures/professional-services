@@ -18,6 +18,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "cloud-function-source-bucket" {
+    # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
     name     = "${var.project_id}-cloud-function-source"
     location = var.region
 }
