@@ -66,6 +66,7 @@ resource "google_storage_bucket" "staging_audio_bucket" {
 
 # Create GCS Bucket to hold audio files that have completed going through the pipeline.
 resource "google_storage_bucket" "processed_audio_bucket" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name = "processed-audio-files-${random_id.rand.hex}"
 }
 
