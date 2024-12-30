@@ -30,6 +30,7 @@ terraform {
 }
 
 resource "google_storage_bucket" "ranger_assessment" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name                        = "${var.project_id}-ranger-assessment"
   location                    = var.storage_region
   project                     = var.project_id
