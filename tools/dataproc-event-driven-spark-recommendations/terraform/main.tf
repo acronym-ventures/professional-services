@@ -23,6 +23,7 @@ resource "google_storage_bucket" "cloud-function-source-bucket" {
 }
 
 resource "google_storage_bucket" "dataproc-cluster-analysis-bucket" {
+    # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
     # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
     name     = "${var.project_id}-dataproc-cluster-analysis"
     location = var.region
