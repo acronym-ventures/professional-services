@@ -21,6 +21,7 @@ resource "google_storage_bucket" "main" {
 }
 
 resource "google_storage_bucket" "composer-bucket" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name                        = "ccm-composer-${random_string.random_id.result}"
   storage_class               = "REGIONAL" 
   project                     = var.project_id
