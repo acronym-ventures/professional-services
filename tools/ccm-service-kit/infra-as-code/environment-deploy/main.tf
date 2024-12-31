@@ -39,6 +39,7 @@ module "ccm_composer" {
 }
 
 resource "google_storage_bucket_object" "upload_to_dag_folder" {
+    # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
     # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
     for_each = {for file in var.files_path: file.local_file => file} 
     name   = "${each.value.gcs_path}"
