@@ -59,6 +59,7 @@ resource "random_string" "random" {
   special = false
 }
 resource "google_storage_bucket" "provider" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name          = "ipam_provider_${random_string.random.result}"
   location      = "EU"
   force_destroy = true
