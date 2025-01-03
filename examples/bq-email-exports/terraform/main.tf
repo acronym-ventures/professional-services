@@ -54,6 +54,7 @@ resource "google_project_iam_binding" "sa_binding" {
 }
 
 resource "google_storage_bucket" "json_bucket" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name          = var.storage_bucket
   project       = module.project-services.project_id
   location      = var.location
