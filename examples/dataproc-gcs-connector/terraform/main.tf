@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "init_actions" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name     = "gcs-connector-init_actions"
   location = var.region
   project  = var.project_id
