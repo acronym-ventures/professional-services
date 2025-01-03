@@ -105,6 +105,7 @@ resource "google_pubsub_subscription" "output_sub" {
 ##             GCS Notification                 ##
 ##################################################
 resource "google_storage_notification" "notification" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   for_each       = toset(var.buckets_to_monitor)
   bucket         = each.value
   payload_format = "JSON_API_V1"
