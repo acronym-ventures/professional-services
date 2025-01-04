@@ -91,6 +91,7 @@ output "ip" {
 
 
 resource "google_storage_bucket" "cryptorealtime-demo-staging" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name = "${var.bucket_name}"
   location = "US"
   force_destroy = true
