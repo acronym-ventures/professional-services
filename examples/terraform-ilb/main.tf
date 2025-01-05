@@ -197,6 +197,7 @@ resource "google_compute_firewall" "fw-ilb-to-backends" {
 
 # test instance
 resource "google_compute_instance" "vm-test" {
+  # Drata: Configure [google_compute_instance.labels] to ensure that organization-wide label conventions are followed.
   provider     = google-beta
   project      = var.project_id
   zone         = "${var.region}-b"
