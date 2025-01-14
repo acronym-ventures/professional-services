@@ -312,6 +312,7 @@ resource "google_bigquery_data_transfer_config" "query_config" {
 
 #Bigquery Alert Dataset
 resource "google_bigquery_dataset" "quota_usage_alert_dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id    = var.big_query_alert_dataset_id
   friendly_name = "quota_usage_alert_dataset"
   description   = var.big_query_alert_dataset_desc
