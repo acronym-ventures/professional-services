@@ -16,6 +16,7 @@
 
 # GKE cluster
 resource "google_container_cluster" "cluster" {
+  # Drata: Kubernetes provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key managed by your Cloud provider to encrypt data at the etcd layer. This encryption protects against attackers who gain access to an offline copy of etcd. Ensure that [google_container_cluster.database_encryption.state] properties are correctly defined for encrypting secrets
   name     = "${var.project_id}-gke"
   location = var.zone
   project  = var.project_id
