@@ -14,6 +14,7 @@
 
 // A storage bucket reserved for templates
 resource "google_storage_bucket" "dataflow_templates" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   location                    = "us"
   name                        = "dataflow-templates-${random_string.dataflow_templates_postfix.result}"
   uniform_bucket_level_access = true
