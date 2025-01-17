@@ -14,6 +14,7 @@
 
 // A storage bucket reserved for templates
 resource "google_storage_bucket" "dataflow_templates" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   location                    = "us"
   name                        = "dataflow-templates-${random_string.dataflow_templates_postfix.result}"
   uniform_bucket_level_access = true
