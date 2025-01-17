@@ -44,6 +44,7 @@ resource "google_project_service" "project_services" {
 
 # Create the bucket where dataflow will write staging and temp data
 resource "google_storage_bucket" "df_bucket" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   project       = var.project
   name          = local.df_bucket
   location      = "US"
