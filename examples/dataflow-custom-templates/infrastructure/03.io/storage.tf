@@ -14,6 +14,7 @@
 
 // Provision storage bucket reserved for templates
 resource "google_storage_bucket" "source" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   location                    = "us"
   name                        = "${var.source_bucket_prefix}-${random_string.source_postfix.result}"
   uniform_bucket_level_access = true
