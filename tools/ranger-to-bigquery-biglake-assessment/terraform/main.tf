@@ -30,6 +30,7 @@ terraform {
 }
 
 resource "google_storage_bucket" "ranger_assessment" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name                        = "${var.project_id}-ranger-assessment"
   location                    = var.storage_region
