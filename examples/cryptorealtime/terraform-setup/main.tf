@@ -91,6 +91,7 @@ output "ip" {
 
 
 resource "google_storage_bucket" "cryptorealtime-demo-staging" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name = "${var.bucket_name}"
   location = "US"
   force_destroy = true
