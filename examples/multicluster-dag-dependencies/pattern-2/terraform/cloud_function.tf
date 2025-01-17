@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "bucket-4-trigger-dag-cloud-fxn" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   project = var.project_id
   name     = "trigger-dag-cloud-fxn"
   location = var.region
