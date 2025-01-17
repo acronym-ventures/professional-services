@@ -23,6 +23,7 @@ resource "google_storage_bucket" "cloud-function-source-bucket" {
 }
 
 resource "google_storage_bucket" "cloud-function-app-bucket" {
+    # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
     name     = "${var.app_id}-out"
     location = var.region
 }
