@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "main" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name                        = "ccm-${random_string.random_id.result}"
   storage_class               = "REGIONAL" 
   project                     = var.project_id
