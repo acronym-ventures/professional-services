@@ -39,6 +39,7 @@ resource "google_project_iam_binding" "sa_binding" {
 }
 
 resource "google_storage_bucket" "personal_dataproc_notebooks_bucket" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   name                     = var.personal_dataproc_notebooks_bucket_name
   location                 = var.region
   project                  = var.project_id
