@@ -61,6 +61,7 @@ resource "google_service_account" "df_worker" {
 }
 
 resource "google_secret_manager_secret" "hash_key_secret" {
+  # Drata: Configure [google_secret_manager_secret.labels] to ensure that organization-wide label conventions are followed.
   provider = google-beta
   project  = var.project
 
