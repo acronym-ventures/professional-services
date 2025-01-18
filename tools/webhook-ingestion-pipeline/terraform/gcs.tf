@@ -14,6 +14,7 @@
 
 
 resource "google_storage_bucket" "webhook_gcs_stage" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   project       = var.project_id
   name          = "${var.project_id}-${var.gcs_bucket_prefix}"
   location      = "US"
