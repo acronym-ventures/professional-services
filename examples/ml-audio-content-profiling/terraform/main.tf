@@ -81,6 +81,7 @@ resource "google_storage_bucket" "transcription_bucket" {
 
 # Create GCS Bucket to hold toxicity output files
 resource "google_storage_bucket" "output_bucket" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name = "output-files-${random_id.rand.hex}"
 }
 
