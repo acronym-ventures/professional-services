@@ -61,6 +61,7 @@ resource "google_service_account" "df_worker" {
 }
 
 resource "google_secret_manager_secret" "hash_key_secret" {
+  # Drata: Configure [google_secret_manager_secret.rotation.rotation_period] to minimize the risk of secret exposure by ensuring that sensitive values are periodically rotated
   provider = google-beta
   project  = var.project
 
