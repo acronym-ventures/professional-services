@@ -8,7 +8,7 @@ resource "google_cloudfunctions_function" "net_logs" {
   name        = "net_logs"
   entry_point = "main"
   description = "Enables network logs whenever a subnet is created or modified."
-  runtime     = "python37"
+  runtime     = "python312"
   region      = "europe-west1"
 
   service_account_email = google_service_account.net_logs_cf.email
