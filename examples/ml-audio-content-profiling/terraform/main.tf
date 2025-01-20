@@ -229,6 +229,7 @@ resource "google_cloudfunctions_function" "perspective_api" {
 }
 
 resource "google_cloudfunctions_function" "nlp_api" {
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on            = ["google_project_service.nlpapi"]
   name                  = "nlp_api"
