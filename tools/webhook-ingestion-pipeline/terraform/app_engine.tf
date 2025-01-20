@@ -61,7 +61,7 @@ resource "google_app_engine_standard_app_version" "webhook_app" {
   project    = var.project_id
   version_id = "v1"
   service    = "default"
-  runtime    = "python37"
+  runtime    = "python311"
 
   entrypoint {
     shell = "gunicorn -b :8080 main:app"

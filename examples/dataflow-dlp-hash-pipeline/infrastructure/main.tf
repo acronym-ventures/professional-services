@@ -44,6 +44,10 @@ resource "google_project_service" "project_services" {
 
 # Create the bucket where dataflow will write staging and temp data
 resource "google_storage_bucket" "df_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   project       = var.project
   name          = local.df_bucket
   location      = "US"
@@ -61,6 +65,8 @@ resource "google_service_account" "df_worker" {
 }
 
 resource "google_secret_manager_secret" "hash_key_secret" {
+  # Drata: Configure [google_secret_manager_secret.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Configure [google_secret_manager_secret.rotation.rotation_period] to minimize the risk of secret exposure by ensuring that sensitive values are periodically rotated
   provider = google-beta
   project  = var.project
 
@@ -73,6 +79,7 @@ resource "google_secret_manager_secret" "hash_key_secret" {
 }
 
 resource "google_pubsub_topic" "input_topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   project = var.project
   name    = var.input_topic
 
@@ -80,6 +87,7 @@ resource "google_pubsub_topic" "input_topic" {
 }
 
 resource "google_pubsub_subscription" "input_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   project = var.project
   name    = "${var.input_topic}-subscription"
   topic   = google_pubsub_topic.input_topic.name
@@ -88,6 +96,7 @@ resource "google_pubsub_subscription" "input_sub" {
 }
 
 resource "google_pubsub_topic" "output_topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   project = var.project
   name    = var.output_topic
 
@@ -95,6 +104,7 @@ resource "google_pubsub_topic" "output_topic" {
 }
 
 resource "google_pubsub_subscription" "output_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   project = var.project
   name    = "${var.output_topic}-subscription"
   topic   = google_pubsub_topic.output_topic.name
@@ -105,6 +115,8 @@ resource "google_pubsub_subscription" "output_sub" {
 ##             GCS Notification                 ##
 ##################################################
 resource "google_storage_notification" "notification" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   for_each       = toset(var.buckets_to_monitor)
   bucket         = each.value
   payload_format = "JSON_API_V1"

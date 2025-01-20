@@ -57,12 +57,14 @@ module "project-services" {
 
 # Create Pub/Sub topic to list projects in the parent node
 resource "google_pubsub_topic" "topic_alert_project_id" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name       = var.topic_alert_project_id
   depends_on = [module.project-services]
 }
 
 # Create Pub/Sub topic to send notification
 resource "google_pubsub_topic" "topic_alert_notification" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name       = var.topic_alert_notification
   depends_on = [module.project-services]
 }
@@ -93,9 +95,12 @@ resource "google_cloud_scheduler_job" "job" {
 
 # cloud function to list projects
 resource "google_cloudfunctions_function" "function-listProjects" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name        = var.cloud_function_list_project
   description = var.cloud_function_list_project_desc
-  runtime     = "java11"
+  runtime     = "java21"
 
   available_memory_mb   = var.cloud_function_list_project_memory
   source_archive_bucket = var.source_code_bucket_name
@@ -103,6 +108,7 @@ resource "google_cloudfunctions_function" "function-listProjects" {
   trigger_http          = true
   entry_point           = "functions.ListProjects"
   service_account_email = var.service_account_email
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   timeout               = var.cloud_function_list_project_timeout
   depends_on            = [module.project-services]
 
@@ -125,15 +131,19 @@ resource "google_cloudfunctions_function_iam_member" "invoker-listProjects" {
 
 # Second cloud function to scan project
 resource "google_cloudfunctions_function" "function-scanProject" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name        = var.cloud_function_scan_project
   description = var.cloud_function_scan_project_desc
-  runtime     = "java11"
+  runtime     = "java21"
 
   available_memory_mb   = var.cloud_function_scan_project_memory
   source_archive_bucket = var.source_code_bucket_name
   source_archive_object = var.source_code_zip
   entry_point           = "functions.ScanProjectQuotas"
   service_account_email = var.service_account_email
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   timeout               = var.cloud_function_scan_project_timeout
   depends_on            = [module.project-services]
 
@@ -163,15 +173,19 @@ resource "google_cloudfunctions_function_iam_member" "invoker-scanProject" {
 
 # Third cloud function to send notification
 resource "google_cloudfunctions_function" "function-notificationProject" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name        = var.cloud_function_notification_project
   description = var.cloud_function_notification_project_desc
-  runtime     = "java11"
+  runtime     = "java21"
 
   available_memory_mb   = var.cloud_function_notification_project_memory
   source_archive_bucket = var.source_code_bucket_name
   source_archive_object = var.source_code_notification_zip
   entry_point           = "functions.SendNotification"
   service_account_email = var.service_account_email
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   timeout               = var.cloud_function_notification_project_timeout
   depends_on            = [module.project-services]
 
@@ -200,6 +214,7 @@ resource "google_cloudfunctions_function_iam_member" "invoker-notificationProjec
 
 # BigQuery Dataset
 resource "google_bigquery_dataset" "dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id                      = var.big_query_dataset_id
   friendly_name                   = var.big_query_dataset_id
   description                     = var.big_query_dataset_desc
@@ -312,6 +327,7 @@ resource "google_bigquery_data_transfer_config" "query_config" {
 
 #Bigquery Alert Dataset
 resource "google_bigquery_dataset" "quota_usage_alert_dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id    = var.big_query_alert_dataset_id
   friendly_name = "quota_usage_alert_dataset"
   description   = var.big_query_alert_dataset_desc

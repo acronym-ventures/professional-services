@@ -25,6 +25,7 @@ resource "google_compute_network" "asm-vpc-3" {
 }
 
 resource "google_compute_subnetwork" "bastion-subnet" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name                     = "bastion-subnet"
   project                  = var.project_id
   region                   = "us-west2"
@@ -34,6 +35,7 @@ resource "google_compute_subnetwork" "bastion-subnet" {
 }
 
 resource "google_compute_subnetwork" "cluster3" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name                     = "cluster3"
   project                  = var.project_id
   region                   = var.region
@@ -78,6 +80,7 @@ resource "google_compute_router_nat" "nat3" {
 }
 
 resource "google_compute_subnetwork" "cluster4" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name                     = "cluster4"
   project                  = var.project_id
   region                   = var.region

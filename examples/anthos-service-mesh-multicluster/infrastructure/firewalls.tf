@@ -19,6 +19,7 @@
 ################################################
 
 resource "google_compute_firewall" "ports-15017-9443-vpc3" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "${var.prefix}-ports-15017-9443-vpc3"
   project       = var.project_id
   network       = google_compute_network.asm-vpc-3.name
@@ -32,6 +33,7 @@ resource "google_compute_firewall" "ports-15017-9443-vpc3" {
 
 # required for the policy controller admission webhook
 resource "google_compute_firewall" "ports-8443-vpc3" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "${var.prefix}-ports-8443-vpc3"
   project       = var.project_id
   network       = google_compute_network.asm-vpc-3.name
@@ -46,6 +48,7 @@ resource "google_compute_firewall" "ports-8443-vpc3" {
 # Allow traffic for all CIDR ranges within this VPC
 # required for bastion to gke access
 resource "google_compute_firewall" "gce-to-vpc3-clusters-all" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "${var.prefix}-gce-to-vpc3-clusters-all"
   project       = var.project_id
   network       = google_compute_network.asm-vpc-3.name

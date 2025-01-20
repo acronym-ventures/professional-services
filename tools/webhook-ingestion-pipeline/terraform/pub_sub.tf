@@ -13,11 +13,13 @@
 # limitations under the License.
 
 resource "google_pubsub_topic" "webhook_topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   project = var.project_id
   name    = var.pubsub_topic
 }
 
 resource "google_pubsub_subscription" "example" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   project = var.project_id
   name  = var.pubsub_subscription
   topic = google_pubsub_topic.webhook_topic.name

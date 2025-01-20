@@ -61,36 +61,58 @@ resource "random_id" "rand" {
 # Create GCS Buckets
 # Create GCS Bucket to hold audio files on upload before they are processed by pipeline.
 resource "google_storage_bucket" "staging_audio_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name = "staging-audio-files-${random_id.rand.hex}"
 }
 
 # Create GCS Bucket to hold audio files that have completed going through the pipeline.
 resource "google_storage_bucket" "processed_audio_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name = "processed-audio-files-${random_id.rand.hex}"
 }
 
 # Create GCS Bucket to hold audio files that failed after going through STT API.
 resource "google_storage_bucket" "error_audio_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name = "error-audio-files-${random_id.rand.hex}"
 }
 
 # Create GCS Bucket to hold transcription output files
 resource "google_storage_bucket" "transcription_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name = "transcription-files-${random_id.rand.hex}"
 }
 
 # Create GCS Bucket to hold toxicity output files
 resource "google_storage_bucket" "output_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name = "output-files-${random_id.rand.hex}"
 }
 
 # Create PubSub resources
 resource "google_pubsub_topic" "stt_topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name       = var.stt_queue_topic_name
   depends_on = ["google_project_service.pubsubapi"]
 }
 
 resource "google_pubsub_subscription" "pull_stt_ids" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   name       = var.stt_queue_subscription_name
   depends_on = ["google_project_service.pubsubapi"]
   topic      = google_pubsub_topic.stt_topic.name
@@ -127,6 +149,10 @@ data "archive_file" "send_stt" {
 
 # Store STT source code
 resource "google_storage_bucket" "function_source_code" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name = "source-code-${random_id.rand.hex}"
 }
 
@@ -158,11 +184,15 @@ resource "google_storage_bucket_object" "nlp_code" {
 
 
 resource "google_cloudfunctions_function" "send_stt_api" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on  = ["google_project_service.speechapi", "google_pubsub_topic.stt_topic"]
   name        = "send_stt_api"
   region      = var.cloud_functions_region
   entry_point = "main"
-  runtime     = "python37"
+  runtime     = "python312"
   environment_variables = {
     topic_name         = google_pubsub_topic.stt_topic.name
     error_audio_bucket = google_storage_bucket.error_audio_bucket.name
@@ -177,11 +207,15 @@ resource "google_cloudfunctions_function" "send_stt_api" {
 }
 
 resource "google_cloudfunctions_function" "read_stt_api" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on  = ["google_project_service.speechapi"]
   name        = "read_stt_api"
   region      = var.cloud_functions_region
   entry_point = "main"
-  runtime     = "python37"
+  runtime     = "python312"
   environment_variables = {
     topic_name             = google_pubsub_topic.stt_topic.name
     subscription_name      = google_pubsub_subscription.pull_stt_ids.name
@@ -211,11 +245,15 @@ resource "google_cloud_scheduler_job" "scheduler_job" {
 }
 
 resource "google_cloudfunctions_function" "perspective_api" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on            = ["google_project_service.commentanalyzerapi", "google_pubsub_topic.stt_topic"]
   name                  = "perspective_api"
   region                = var.cloud_functions_region
   entry_point           = "main"
-  runtime               = "python37"
+  runtime               = "python312"
   source_archive_bucket = google_storage_bucket.function_source_code.name
   source_archive_object = google_storage_bucket_object.perspective_code.name
   timeout               = "540"
@@ -229,11 +267,15 @@ resource "google_cloudfunctions_function" "perspective_api" {
 }
 
 resource "google_cloudfunctions_function" "nlp_api" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on            = ["google_project_service.nlpapi"]
   name                  = "nlp_api"
   region                = var.cloud_functions_region
   entry_point           = "main"
-  runtime               = "python37"
+  runtime               = "python312"
   source_archive_bucket = google_storage_bucket.function_source_code.name
   source_archive_object = google_storage_bucket_object.nlp_code.name
   timeout               = "540"

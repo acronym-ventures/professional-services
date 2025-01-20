@@ -30,6 +30,9 @@ resource "random_string" "bucket_suffix" {
 
 
 resource "google_storage_bucket" "bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   project     = var.project_id
   location    = var.location
   name        = "cf-sample-bucket-${random_string.bucket_suffix.id}"
@@ -44,6 +47,9 @@ resource "google_storage_bucket_object" "archive" {
 }
 
 resource "google_cloudfunctions_function" "function" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   project     = var.project_id
   region      = var.location
   name        = "sample-function"

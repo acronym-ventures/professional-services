@@ -4,11 +4,14 @@
  * agreement with Google.  
  */
 resource "google_cloudfunctions_function" "net_logs" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   project     = google_project.demo_project.project_id
   name        = "net_logs"
   entry_point = "main"
   description = "Enables network logs whenever a subnet is created or modified."
-  runtime     = "python37"
+  runtime     = "python312"
   region      = "europe-west1"
 
   service_account_email = google_service_account.net_logs_cf.email
@@ -40,6 +43,9 @@ resource "google_storage_bucket_object" "cloud_function" {
 
 # GCS bucket to store the clouf function code
 resource "google_storage_bucket" "cloud_function" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name                        = "${google_project.demo_project.project_id}-cf${local.suffix_dash}"
   project                     = google_project.demo_project.project_id
   location                    = var.region

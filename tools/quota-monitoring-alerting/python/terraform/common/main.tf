@@ -201,6 +201,7 @@ resource "null_resource" "replace_project_id_in_config" {
 # Bigquery
 #...............................................................................
 resource "google_bigquery_dataset" "quota" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = local.config.export["bigquery"]["dataset"]
 
   depends_on = [module.project_services,
@@ -211,6 +212,7 @@ resource "google_bigquery_dataset" "quota" {
 
 
 resource "google_bigquery_table" "metrics" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.quota.dataset_id
   table_id   = "metrics"
 
@@ -226,6 +228,7 @@ resource "google_bigquery_table" "metrics" {
 
 
 resource "google_bigquery_table" "thresholds" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.quota.dataset_id
   table_id   = "thresholds"
 
@@ -258,6 +261,7 @@ data "local_file" "dashboard_view_sql" {
 
 
 resource "google_bigquery_table" "dashboard_view" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = local.config.export["bigquery"]["dataset"]
   table_id   = "dashboard_view"
 
@@ -367,6 +371,7 @@ resource "google_pubsub_topic" "thresholds" {
 
 
 resource "google_pubsub_topic" "bigquery" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name = "bigquery"
 
   depends_on = [resource.null_resource.pubsub]
@@ -374,6 +379,7 @@ resource "google_pubsub_topic" "bigquery" {
 
 
 resource "google_pubsub_subscription" "metrics_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   name  = "metrics_sub"
   topic = resource.google_pubsub_topic.metrics.name
 
@@ -401,6 +407,7 @@ resource "google_pubsub_subscription" "metrics_sub" {
 
 
 resource "google_pubsub_subscription" "thresholds_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   name  = "thresholds_sub"
   topic = resource.google_pubsub_topic.thresholds.name
 
@@ -428,6 +435,7 @@ resource "google_pubsub_subscription" "thresholds_sub" {
 
 
 resource "google_pubsub_subscription" "bigquery_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   name  = "bigquery_sub"
   topic = resource.google_pubsub_topic.bigquery.name
 
