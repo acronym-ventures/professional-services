@@ -133,6 +133,7 @@ resource "google_compute_instance" "reddit_vm" {
 }
 
 resource "google_pubsub_topic" "pubsub-topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name = "${var.pubsub_topic_name}"
   message_retention_duration = "86600s"
 }
