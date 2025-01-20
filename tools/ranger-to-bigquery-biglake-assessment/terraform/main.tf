@@ -61,6 +61,7 @@ module "bigquery-ranger-assessment" {
 }
 
 resource "google_bigquery_table" "hive_policies_view" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   project    = var.project_id
   dataset_id = var.dataset_id
   depends_on = [
