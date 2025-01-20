@@ -33,6 +33,7 @@ resource "google_bigtable_instance" "instance" {
 
 
 resource "google_compute_instance" "default" {
+  # Drata: Configure [google_compute_instance.labels] to ensure that organization-wide label conventions are followed.
   project = "${var.project_id}"
   zone = "${var.zone}"
   name = "tf-compute-1"
