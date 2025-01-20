@@ -78,6 +78,7 @@ resource "google_compute_router_nat" "nat3" {
 }
 
 resource "google_compute_subnetwork" "cluster4" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name                     = "cluster4"
   project                  = var.project_id
   region                   = var.region
