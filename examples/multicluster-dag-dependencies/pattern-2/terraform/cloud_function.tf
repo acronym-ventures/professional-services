@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "bucket-4-trigger-dag-cloud-fxn" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   project = var.project_id
   name     = "trigger-dag-cloud-fxn"
   location = var.region
