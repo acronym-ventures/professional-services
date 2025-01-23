@@ -18,6 +18,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "cloud-function-source-bucket" {
+    # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
     name     = "${var.project_id}-cloud-function-source"
     location = var.region
 }
