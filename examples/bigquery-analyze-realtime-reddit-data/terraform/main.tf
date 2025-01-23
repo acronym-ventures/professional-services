@@ -138,6 +138,7 @@ resource "google_pubsub_topic" "pubsub-topic" {
 }
 
 resource "google_bigquery_dataset" "comments" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id                  = "${var.bq_dataset_name}"
   friendly_name               = "${var.bq_dataset_name}"
   description                 = "Contains contents of reddit stream"
