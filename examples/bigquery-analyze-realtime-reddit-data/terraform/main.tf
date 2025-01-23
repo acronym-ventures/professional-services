@@ -71,6 +71,7 @@ resource "google_project_iam_binding" "reddit_vm_pubsub" {
 
 
 resource "google_compute_instance" "reddit_vm" {
+  # Drata: Configure [google_compute_instance.labels] to ensure that organization-wide label conventions are followed.
   name         = "reddit-data-collector-1"
   machine_type = "e2-micro"
   zone         = "${var.zone}"
