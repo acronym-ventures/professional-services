@@ -46,6 +46,7 @@ resource "google_project" "seed_project" {
 }
 
 resource "google_storage_bucket" "tf_state_bkt" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   project                     = google_project.seed_project.project_id
   name                        = "terragrunt-iac-core-bkt-${random_id.server.hex}"
   location                    = var.default_region
