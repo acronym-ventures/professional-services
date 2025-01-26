@@ -34,6 +34,7 @@ resource "google_compute_subnetwork" "bastion-subnet" {
 }
 
 resource "google_compute_subnetwork" "cluster3" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name                     = "cluster3"
   project                  = var.project_id
   region                   = var.region
