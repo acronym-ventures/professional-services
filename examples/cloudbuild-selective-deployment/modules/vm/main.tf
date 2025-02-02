@@ -36,6 +36,7 @@ resource "google_compute_instance" "vm" {
   }
 
   labels = var.labels
+  # Drata: Configure [google_compute_instance.labels] to ensure that organization-wide label conventions are followed.
   service_account {
     email  = var.service_account
     scopes = ["cloud-platform"]
