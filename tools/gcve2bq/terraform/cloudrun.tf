@@ -25,6 +25,7 @@ data "google_service_account" "cloud_run_sa" {
 }
 
 resource "google_secret_manager_secret" "secret" {
+  # Drata: Configure [google_secret_manager_secret.rotation.rotation_period] to minimize the risk of secret exposure by ensuring that sensitive values are periodically rotated
   # Drata: Configure [google_secret_manager_secret.labels] to ensure that organization-wide label conventions are followed.
   secret_id = var.vCenter-password-secret
   replication {
