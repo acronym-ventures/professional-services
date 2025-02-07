@@ -54,6 +54,7 @@ resource "ipam_ip_range" "pod_ranges" {
 }
 
 resource "google_compute_subnetwork" "pod-subnet" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "gke-pods"
   ip_cidr_range = ipam_ip_range.pod_ranges.cidr
   region        = "us-central1"
