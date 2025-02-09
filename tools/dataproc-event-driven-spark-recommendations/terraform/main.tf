@@ -23,6 +23,7 @@ resource "google_storage_bucket" "cloud-function-source-bucket" {
 }
 
 resource "google_storage_bucket" "dataproc-cluster-analysis-bucket" {
+    # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
     name     = "${var.project_id}-dataproc-cluster-analysis"
     location = var.region
 }
