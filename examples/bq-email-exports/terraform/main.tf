@@ -81,6 +81,7 @@ resource "google_pubsub_topic" "pubsub_trigger_email" {
 }
 
 resource "google_bigquery_dataset" "bq_dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id                  = var.bq_dataset_name
   location                    = var.location
   default_table_expiration_ms = var.bq_dataset_expiration
