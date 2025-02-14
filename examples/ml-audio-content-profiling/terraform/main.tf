@@ -177,6 +177,7 @@ resource "google_cloudfunctions_function" "send_stt_api" {
 }
 
 resource "google_cloudfunctions_function" "read_stt_api" {
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   depends_on  = ["google_project_service.speechapi"]
   name        = "read_stt_api"
   region      = var.cloud_functions_region
