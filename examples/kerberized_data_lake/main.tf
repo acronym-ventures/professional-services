@@ -203,6 +203,7 @@ resource "google_storage_bucket_object" "static_init_actions" {
 }
 
 resource "google_storage_bucket_object" "rendered_init_actions" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   for_each = local.templated_init_actions
 
   name = "init-actions/${each.key}.sh"
