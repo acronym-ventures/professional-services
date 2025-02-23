@@ -46,6 +46,7 @@ resource "google_compute_firewall" "ports-8443-vpc3" {
 # Allow traffic for all CIDR ranges within this VPC
 # required for bastion to gke access
 resource "google_compute_firewall" "gce-to-vpc3-clusters-all" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "${var.prefix}-gce-to-vpc3-clusters-all"
   project       = var.project_id
   network       = google_compute_network.asm-vpc-3.name
