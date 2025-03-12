@@ -134,6 +134,7 @@ resource "google_cloudfunctions_function" "function-scanProject" {
   source_archive_object = var.source_code_zip
   entry_point           = "functions.ScanProjectQuotas"
   service_account_email = var.service_account_email
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   timeout               = var.cloud_function_scan_project_timeout
   depends_on            = [module.project-services]
 
