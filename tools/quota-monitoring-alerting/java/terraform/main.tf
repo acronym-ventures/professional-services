@@ -103,6 +103,7 @@ resource "google_cloudfunctions_function" "function-listProjects" {
   trigger_http          = true
   entry_point           = "functions.ListProjects"
   service_account_email = var.service_account_email
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   timeout               = var.cloud_function_list_project_timeout
   depends_on            = [module.project-services]
 
