@@ -19,6 +19,7 @@ resource "google_storage_bucket" "init_actions" {
 }
 
 resource "google_storage_bucket_object" "gcs_connector_jar" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name   = "gcs-connector-${var.hadoop_version}-shaded.jar"
   source = "../hadoop-connectors/gcs/target/gcs-connector-${var.hadoop_version}-SNAPSHOT-shaded.jar"
   bucket = "gcs-connector-init_actions"
