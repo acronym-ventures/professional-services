@@ -226,6 +226,7 @@ resource "google_bigquery_table" "metrics" {
 
 
 resource "google_bigquery_table" "thresholds" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.quota.dataset_id
   table_id   = "thresholds"
 
