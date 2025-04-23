@@ -162,7 +162,7 @@ resource "google_cloudfunctions_function" "send_stt_api" {
   name        = "send_stt_api"
   region      = var.cloud_functions_region
   entry_point = "main"
-  runtime     = "python37"
+  runtime     = "python312"
   environment_variables = {
     topic_name         = google_pubsub_topic.stt_topic.name
     error_audio_bucket = google_storage_bucket.error_audio_bucket.name
