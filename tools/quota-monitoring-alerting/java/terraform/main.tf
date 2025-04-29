@@ -125,6 +125,7 @@ resource "google_cloudfunctions_function_iam_member" "invoker-listProjects" {
 
 # Second cloud function to scan project
 resource "google_cloudfunctions_function" "function-scanProject" {
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
   # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name        = var.cloud_function_scan_project
   description = var.cloud_function_scan_project_desc
