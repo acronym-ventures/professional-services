@@ -28,6 +28,7 @@ resource "google_bigquery_dataset" "default" {
 }
 
 resource "google_bigquery_table" "vm-table" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.default.dataset_id
   table_id   = var.vm-table-name
 }
