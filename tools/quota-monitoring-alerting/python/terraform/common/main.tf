@@ -367,6 +367,7 @@ resource "google_pubsub_topic" "thresholds" {
 
 
 resource "google_pubsub_topic" "bigquery" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name = "bigquery"
 
   depends_on = [resource.null_resource.pubsub]
