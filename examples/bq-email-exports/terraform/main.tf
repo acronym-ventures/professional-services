@@ -76,6 +76,7 @@ resource "google_pubsub_topic" "pubsub_export" {
 
 # Topic that triggers function 2 that sends email
 resource "google_pubsub_topic" "pubsub_trigger_email" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name    = var.pubsub_send_email
   project = module.project-services.project_id
 }
