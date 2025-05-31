@@ -181,7 +181,7 @@ resource "google_cloudfunctions_function" "read_stt_api" {
   name        = "read_stt_api"
   region      = var.cloud_functions_region
   entry_point = "main"
-  runtime     = "python37"
+  runtime     = "python312"
   environment_variables = {
     topic_name             = google_pubsub_topic.stt_topic.name
     subscription_name      = google_pubsub_subscription.pull_stt_ids.name
