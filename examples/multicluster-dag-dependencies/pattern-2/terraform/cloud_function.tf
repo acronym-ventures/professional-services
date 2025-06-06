@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "bucket-4-trigger-dag-cloud-fxn" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   project = var.project_id
   name     = "trigger-dag-cloud-fxn"
   location = var.region
