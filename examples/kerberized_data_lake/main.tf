@@ -212,6 +212,7 @@ resource "google_storage_bucket_object" "rendered_init_actions" {
 }
 
 resource "google_storage_bucket_object" "shutdown_scripts" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   for_each = local.shutdown_scripts
 
   name   = "shutdown-scripts/${each.value}"
