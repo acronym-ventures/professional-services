@@ -21,6 +21,7 @@ resource "google_storage_bucket" "main" {
 }
 
 resource "google_storage_bucket" "composer-bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name                        = "ccm-composer-${random_string.random_id.result}"
   storage_class               = "REGIONAL" 
   project                     = var.project_id
