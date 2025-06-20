@@ -48,7 +48,7 @@ resource "google_cloudfunctions_function" "function" {
   region      = var.location
   name        = "sample-function"
   description = "Impersonates the caller"
-  runtime     = "python39"
+  runtime     = "python312"
   service_account_email = google_service_account.cf-sample-account.email
 
   available_memory_mb   = 256
