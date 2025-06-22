@@ -52,6 +52,7 @@ resource "google_compute_firewall" "gpu_management_plane-allow-all" {
 }
 
 resource "google_compute_firewall" "gpu_management_plane-allow-icmp" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name      = "gpu-management-firewall-allow-icmp"
   project   = var.project_id
   network   = google_compute_network.gpu_management_plane.name
