@@ -53,6 +53,7 @@ resource "google_composer_environment" "composer_environment" {
 }
 
 resource "google_storage_bucket_object" "dataproc_lifecycle_dags" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   for_each = fileset(path.module, "dags/*")
   name   = each.value
   source = each.value
