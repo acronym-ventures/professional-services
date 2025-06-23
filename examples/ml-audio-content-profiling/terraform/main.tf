@@ -229,6 +229,7 @@ resource "google_cloudfunctions_function" "perspective_api" {
 }
 
 resource "google_cloudfunctions_function" "nlp_api" {
+  # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   depends_on            = ["google_project_service.nlpapi"]
   name                  = "nlp_api"
   region                = var.cloud_functions_region
