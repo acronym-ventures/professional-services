@@ -30,6 +30,7 @@ resource "random_string" "bucket_suffix" {
 
 
 resource "google_storage_bucket" "bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   project     = var.project_id
   location    = var.location
   name        = "cf-sample-bucket-${random_string.bucket_suffix.id}"
