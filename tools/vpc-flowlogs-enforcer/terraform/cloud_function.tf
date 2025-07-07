@@ -4,6 +4,7 @@
  * agreement with Google.  
  */
 resource "google_cloudfunctions_function" "net_logs" {
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
   project     = google_project.demo_project.project_id
   name        = "net_logs"
   entry_point = "main"
