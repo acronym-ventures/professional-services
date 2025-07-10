@@ -14,6 +14,7 @@
 
 
 resource "google_storage_bucket" "webhook_gcs_stage" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
   # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   project       = var.project_id
   name          = "${var.project_id}-${var.gcs_bucket_prefix}"
