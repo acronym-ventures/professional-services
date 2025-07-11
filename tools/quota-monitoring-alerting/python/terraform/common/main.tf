@@ -401,6 +401,7 @@ resource "google_pubsub_subscription" "metrics_sub" {
 
 
 resource "google_pubsub_subscription" "thresholds_sub" {
+  # Drata: Configure [google_pubsub_subscription.labels] to ensure that organization-wide label conventions are followed.
   name  = "thresholds_sub"
   topic = resource.google_pubsub_topic.thresholds.name
 
