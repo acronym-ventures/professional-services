@@ -20,6 +20,7 @@ resource "google_pubsub_schema" "workflow_status" {
 }
 
 resource "google_pubsub_topic" "workflow_status_topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   for_each = toset(var.workflow_status_topics)
   name = each.key
   project = var.project_id
