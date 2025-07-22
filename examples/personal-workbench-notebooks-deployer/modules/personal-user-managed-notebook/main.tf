@@ -39,6 +39,7 @@ resource "google_project_iam_binding" "sa_binding" {
 }
 
 resource "google_storage_bucket" "personal_dataproc_notebooks_bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name                     = var.personal_dataproc_notebooks_bucket_name
   location                 = var.region
   project                  = var.project_id
