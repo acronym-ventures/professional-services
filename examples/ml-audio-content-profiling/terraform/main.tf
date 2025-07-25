@@ -71,6 +71,7 @@ resource "google_storage_bucket" "processed_audio_bucket" {
 
 # Create GCS Bucket to hold audio files that failed after going through STT API.
 resource "google_storage_bucket" "error_audio_bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name = "error-audio-files-${random_id.rand.hex}"
 }
 
