@@ -86,6 +86,7 @@ resource "google_storage_bucket" "output_bucket" {
 
 # Create PubSub resources
 resource "google_pubsub_topic" "stt_topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name       = var.stt_queue_topic_name
   depends_on = ["google_project_service.pubsubapi"]
 }
