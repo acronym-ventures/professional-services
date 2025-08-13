@@ -70,6 +70,7 @@ resource "google_storage_bucket" "json_bucket" {
 
 # Topic that triggers function 1 that exports results
 resource "google_pubsub_topic" "pubsub_export" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name    = var.pubsub_export
   project = module.project-services.project_id
 }
