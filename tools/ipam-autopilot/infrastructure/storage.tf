@@ -59,6 +59,7 @@ resource "random_string" "random" {
   special = false
 }
 resource "google_storage_bucket" "provider" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name          = "ipam_provider_${random_string.random.result}"
   location      = "EU"
   force_destroy = true
