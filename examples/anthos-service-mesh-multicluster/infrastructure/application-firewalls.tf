@@ -25,6 +25,7 @@
 #   "checkoutservice:5050"
 
 resource "google_compute_firewall" "from-cluster3-to-cluster4" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "${var.prefix}-from-cluster3-to-cluster4"
   project       = var.project_id
   network       = google_compute_network.asm-vpc-3.name
