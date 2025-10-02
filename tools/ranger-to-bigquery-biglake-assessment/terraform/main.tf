@@ -90,6 +90,7 @@ resource "google_bigquery_table" "hive_policies_view" {
 }
 
 resource "google_bigquery_table" "hive_policy_stats" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   project    = var.project_id
   dataset_id = var.dataset_id
 
