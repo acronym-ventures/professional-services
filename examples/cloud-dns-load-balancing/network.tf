@@ -24,6 +24,7 @@ data "google_compute_subnetwork" "lb_subnetwork" {
 }
 
 resource "google_compute_subnetwork" "proxy_subnetwork" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   for_each      = data.google_compute_subnetwork.lb_subnetwork
   name          = "proxy-${each.value.region}"
   region        = each.value.region
