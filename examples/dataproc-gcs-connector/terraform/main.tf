@@ -106,6 +106,7 @@ resource "google_compute_network" "ingestion" {
 }
 
 resource "google_compute_subnetwork" "dataproc" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   project                  = var.project_id
   name                     = var.dataproc_subnet
   ip_cidr_range            = "10.2.0.0/16"
