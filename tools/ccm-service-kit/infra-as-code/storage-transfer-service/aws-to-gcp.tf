@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_storage_transfer_job" "aws_to_gcp_service" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   description = "Service used to transfer data from S3 to GCS"
   project     = var.project_id #TODO: Set project ID
