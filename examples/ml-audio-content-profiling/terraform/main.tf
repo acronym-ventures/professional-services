@@ -211,6 +211,7 @@ resource "google_cloud_scheduler_job" "scheduler_job" {
 }
 
 resource "google_cloudfunctions_function" "perspective_api" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
   # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
   # Drata: Specify a Service Account in [google_cloudfunctions_function.service_account_email] to avoid using default Service Accounts
   # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
