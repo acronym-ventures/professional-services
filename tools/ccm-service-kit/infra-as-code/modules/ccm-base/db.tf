@@ -13,6 +13,7 @@
 # limitations under the License.
 
 resource "google_bigquery_dataset" "cloud_cost_staging" {
+    # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
     project                     = var.project_id
     dataset_id                  = "cloud_cost_staging_ebf"
     friendly_name               = "Cloud Cost Staging ebf"
