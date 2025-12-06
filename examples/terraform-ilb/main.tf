@@ -22,6 +22,7 @@ resource "google_compute_network" "default" {
 
 # proxy only subnet
 resource "google_compute_subnetwork" "proxy" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   provider      = google-beta
   project       = var.project_id
   name          = "lb"
