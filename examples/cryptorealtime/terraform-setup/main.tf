@@ -67,6 +67,7 @@ resource "google_compute_instance" "default" {
 
 
 resource "google_compute_firewall" "http-server" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   project = "${var.project_id}"
   name = "webserver5000rule"
   network = "default"
