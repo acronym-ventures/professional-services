@@ -54,6 +54,7 @@ resource "google_project_iam_binding" "sa_binding" {
 }
 
 resource "google_storage_bucket" "json_bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   name          = var.storage_bucket
   project       = module.project-services.project_id
   location      = var.location
