@@ -15,6 +15,7 @@
  */
 
 resource "google_storage_bucket" "history-bucket" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
   project       = "${var.project}"
   name          = "${var.history-bucket}"
   storage_class = "REGIONAL"
