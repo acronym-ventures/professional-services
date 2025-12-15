@@ -140,6 +140,7 @@ resource "google_storage_bucket_object" "archive_1" {
 }
 
 resource "google_cloudfunctions_function" "function_1" {
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name    = var.export_results_function_name
   project = module.project-services.project_id
   runtime = "python312"
