@@ -187,7 +187,7 @@ resource "google_storage_bucket_object" "archive_2" {
 resource "google_cloudfunctions_function" "function_2" {
   name    = var.email_results_function_name
   project = module.project-services.project_id
-  runtime = "python37"
+  runtime = "python312"
 
   event_trigger {
     event_type = "google.pubsub.topic.publish"
