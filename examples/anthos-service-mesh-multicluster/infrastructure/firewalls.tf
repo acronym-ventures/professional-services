@@ -19,6 +19,7 @@
 ################################################
 
 resource "google_compute_firewall" "ports-15017-9443-vpc3" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name          = "${var.prefix}-ports-15017-9443-vpc3"
   project       = var.project_id
   network       = google_compute_network.asm-vpc-3.name
