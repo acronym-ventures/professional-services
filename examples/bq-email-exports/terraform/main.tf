@@ -168,6 +168,7 @@ resource "google_cloudfunctions_function" "function_1" {
 
 # Function 2 which will send email with link to GCS file
 resource "google_storage_bucket" "function_bucket_2" {
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
   # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name    = var.function_bucket_2
   project = module.project-services.project_id
