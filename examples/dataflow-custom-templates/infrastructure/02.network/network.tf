@@ -20,6 +20,7 @@ resource "google_compute_network" "default" {
 
 // Provision subnetwork of the virtual custom network
 resource "google_compute_subnetwork" "default" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name                     = "data-pipelines"
   ip_cidr_range            = var.subnetwork_cidr_range
   network                  = google_compute_network.default.name
