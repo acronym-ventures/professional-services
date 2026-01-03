@@ -38,6 +38,7 @@ module "mig-l7" {
 
 # Additional firewall rule to allow traffic from the L7 RILB proxy subnetwork to the MIG VMs
 resource "google_compute_firewall" "mig-ilb-fw" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   for_each      = var.locations
   project       = var.project_id
   name          = "mig-fw-allow-proxies-${each.key}"
