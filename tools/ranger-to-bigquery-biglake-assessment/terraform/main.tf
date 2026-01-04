@@ -30,6 +30,7 @@ terraform {
 }
 
 resource "google_storage_bucket" "ranger_assessment" {
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name                        = "${var.project_id}-ranger-assessment"
   location                    = var.storage_region
   project                     = var.project_id
