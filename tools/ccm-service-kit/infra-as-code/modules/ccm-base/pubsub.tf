@@ -18,6 +18,7 @@ resource "google_pubsub_topic" "ccm-trigger-pubsub" {
 }
 
 resource "google_pubsub_topic" "ccm-delete-pubsub" {
+    # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
     project = var.project_id
     name = var.ccm-delete-pubsub-topic
 }
