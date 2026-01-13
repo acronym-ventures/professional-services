@@ -201,6 +201,7 @@ resource "null_resource" "replace_project_id_in_config" {
 # Bigquery
 #...............................................................................
 resource "google_bigquery_dataset" "quota" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = local.config.export["bigquery"]["dataset"]
 
   depends_on = [module.project_services,
