@@ -13,18 +13,26 @@
 # limitations under the License.
 
 resource "google_storage_bucket" "init_actions" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name     = "gcs-connector-init_actions"
   location = var.region
   project  = var.project_id
 }
 
 resource "google_storage_bucket_object" "gcs_connector_jar" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name   = "gcs-connector-${var.hadoop_version}-shaded.jar"
   source = "../hadoop-connectors/gcs/target/gcs-connector-${var.hadoop_version}-SNAPSHOT-shaded.jar"
   bucket = "gcs-connector-init_actions"
 }
 
 resource "google_storage_bucket_object" "init_script" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name   = "dataproc-init-script.sh"
   source = "../connectors.sh"
   bucket = "gcs-connector-init_actions"
@@ -78,6 +86,7 @@ resource "google_dataproc_cluster" "dataproc-cluster" {
 }
 
 resource "google_compute_firewall" "dataproc_internal" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name    = "dataproc-allow-internal"
   project = var.project_id
   network = google_compute_network.ingestion.self_link
@@ -106,6 +115,7 @@ resource "google_compute_network" "ingestion" {
 }
 
 resource "google_compute_subnetwork" "dataproc" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   project                  = var.project_id
   name                     = var.dataproc_subnet
   ip_cidr_range            = "10.2.0.0/16"

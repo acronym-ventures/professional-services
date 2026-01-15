@@ -16,6 +16,7 @@
 
 # GKE cluster
 resource "google_container_cluster" "cluster" {
+  # Drata: Kubernetes provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key managed by your Cloud provider to encrypt data at the etcd layer. This encryption protects against attackers who gain access to an offline copy of etcd. Ensure that [google_container_cluster.database_encryption.state] properties are correctly defined for encrypting secrets
   name     = "${var.project_id}-gke"
   location = var.zone
   project  = var.project_id
@@ -31,6 +32,8 @@ resource "google_container_cluster" "cluster" {
 
 # Spot pool
 resource "google_container_node_pool" "spot_pool" {
+  # Drata: Set [google_container_node_pool.management.auto_repair] to [true] for automatic repairs to maintain healthy instances
+  # Drata: Set [google_container_node_pool.management.auto_upgrade] to true to automatically update nodes in the cluster to the latest control plane version
   provider = google-beta
 
   name       = "spot-node-pool"
@@ -65,6 +68,8 @@ resource "google_container_node_pool" "spot_pool" {
 
 # On-demand pool
 resource "google_container_node_pool" "on_demand_pool" {
+  # Drata: Set [google_container_node_pool.management.auto_repair] to [true] for automatic repairs to maintain healthy instances
+  # Drata: Set [google_container_node_pool.management.auto_upgrade] to true to automatically update nodes in the cluster to the latest control plane version
   name       = "on-demand-node-pool"
   location   = var.zone
   project    = var.project_id

@@ -22,6 +22,7 @@ resource "google_compute_network" "default" {
 
 # proxy only subnet
 resource "google_compute_subnetwork" "proxy" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   provider      = google-beta
   project       = var.project_id
   name          = "lb"
@@ -169,6 +170,7 @@ resource "google_compute_region_instance_group_manager" "mig" {
 
 # allow all access from IAP and health check ranges
 resource "google_compute_firewall" "fw-iap" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   provider      = google-beta
   project       = var.project_id
   name          = "allow-iap-hc"
@@ -182,6 +184,7 @@ resource "google_compute_firewall" "fw-iap" {
 
 # allow http from proxy subnet to backends
 resource "google_compute_firewall" "fw-ilb-to-backends" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   provider      = google-beta
   project       = var.project_id
   name          = "allow-ilb-to-backends"
@@ -197,6 +200,7 @@ resource "google_compute_firewall" "fw-ilb-to-backends" {
 
 # test instance
 resource "google_compute_instance" "vm-test" {
+  # Drata: Configure [google_compute_instance.labels] to ensure that organization-wide label conventions are followed.
   provider     = google-beta
   project      = var.project_id
   zone         = "${var.region}-b"

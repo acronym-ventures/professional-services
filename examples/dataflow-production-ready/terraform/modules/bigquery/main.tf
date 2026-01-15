@@ -14,12 +14,14 @@
 
 # Set up BQ Dataset
 resource "google_bigquery_dataset" "bq_demo_dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   project    = var.project
   dataset_id = var.dataset_name
   location   = var.dataset_location
 }
 
 resource "google_bigquery_table" "bq_demo_tables" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   for_each   = fileset(var.bq_path_to_schemas, "*.json")
   project    = var.project
   dataset_id = google_bigquery_dataset.bq_demo_dataset.dataset_id

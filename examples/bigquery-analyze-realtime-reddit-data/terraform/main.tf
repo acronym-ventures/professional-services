@@ -71,6 +71,7 @@ resource "google_project_iam_binding" "reddit_vm_pubsub" {
 
 
 resource "google_compute_instance" "reddit_vm" {
+  # Drata: Configure [google_compute_instance.labels] to ensure that organization-wide label conventions are followed.
   name         = "reddit-data-collector-1"
   machine_type = "e2-micro"
   zone         = "${var.zone}"
@@ -133,11 +134,13 @@ resource "google_compute_instance" "reddit_vm" {
 }
 
 resource "google_pubsub_topic" "pubsub-topic" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name = "${var.pubsub_topic_name}"
   message_retention_duration = "86600s"
 }
 
 resource "google_bigquery_dataset" "comments" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id                  = "${var.bq_dataset_name}"
   friendly_name               = "${var.bq_dataset_name}"
   description                 = "Contains contents of reddit stream"
@@ -145,6 +148,7 @@ resource "google_bigquery_dataset" "comments" {
 }
 
 resource "google_bigquery_table" "stream_raw" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.comments.dataset_id
   table_id   = "${var.bq_table_name}"
   deletion_protection = false
@@ -300,6 +304,10 @@ EOF
 }
 
 resource "google_storage_bucket" "app_bucket" {
+    # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+    # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+    # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+    # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
     name          = "${var.app_bucket}"
     location      = "${var.location}"
     force_destroy = true

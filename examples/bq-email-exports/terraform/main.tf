@@ -54,6 +54,10 @@ resource "google_project_iam_binding" "sa_binding" {
 }
 
 resource "google_storage_bucket" "json_bucket" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name          = var.storage_bucket
   project       = module.project-services.project_id
   location      = var.location
@@ -70,23 +74,27 @@ resource "google_storage_bucket" "json_bucket" {
 
 # Topic that triggers function 1 that exports results
 resource "google_pubsub_topic" "pubsub_export" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name    = var.pubsub_export
   project = module.project-services.project_id
 }
 
 # Topic that triggers function 2 that sends email
 resource "google_pubsub_topic" "pubsub_trigger_email" {
+  # Drata: Configure [google_pubsub_topic.labels] to ensure that organization-wide label conventions are followed.
   name    = var.pubsub_send_email
   project = module.project-services.project_id
 }
 
 resource "google_bigquery_dataset" "bq_dataset" {
+  # Drata: Configure [google_bigquery_dataset.labels] to ensure that organization-wide label conventions are followed.
   dataset_id                  = var.bq_dataset_name
   location                    = var.location
   default_table_expiration_ms = var.bq_dataset_expiration
 }
 
 resource "google_bigquery_table" "bq_table" {
+  # Drata: Configure [google_bigquery_table.labels] to ensure that organization-wide label conventions are followed.
   dataset_id = google_bigquery_dataset.bq_dataset.dataset_id
   table_id   = var.bq_table_name
 }
@@ -123,6 +131,10 @@ resource "google_project_iam_binding" "log_sink_writer" {
 
 # Function 1 which will export query results to GCS
 resource "google_storage_bucket" "function_bucket_1" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name    = var.function_bucket_1
   project = module.project-services.project_id
 }
@@ -140,9 +152,12 @@ resource "google_storage_bucket_object" "archive_1" {
 }
 
 resource "google_cloudfunctions_function" "function_1" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name    = var.export_results_function_name
   project = module.project-services.project_id
-  runtime = "python37"
+  runtime = "python312"
 
   event_trigger {
     event_type = "google.pubsub.topic.publish"
@@ -168,6 +183,10 @@ resource "google_cloudfunctions_function" "function_1" {
 
 # Function 2 which will send email with link to GCS file
 resource "google_storage_bucket" "function_bucket_2" {
+  # Drata: Set [google_storage_bucket.uniform_bucket_level_access] to [true] to configure resource access using IAM policies
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Configure [google_storage_bucket.labels] to ensure that organization-wide label conventions are followed.
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   name    = var.function_bucket_2
   project = module.project-services.project_id
 }
@@ -185,9 +204,12 @@ resource "google_storage_bucket_object" "archive_2" {
 }
 
 resource "google_cloudfunctions_function" "function_2" {
+  # Drata: Set [google_cloudfunctions_function.ingress_settings] to [ALLOW_INTERNAL_AND_GCLB]. It is preferred that cloud functions are exposed through Google load balancer
+  # Drata: Ensure that [google_cloudfunctions_function.vpc_connector_egress_settings] is set to [ALL_TRAFFIC] so that all outgoing traffic is routed through your VPC network
+  # Drata: Configure [google_cloudfunctions_function.labels] to ensure that organization-wide label conventions are followed.
   name    = var.email_results_function_name
   project = module.project-services.project_id
-  runtime = "python37"
+  runtime = "python312"
 
   event_trigger {
     event_type = "google.pubsub.topic.publish"

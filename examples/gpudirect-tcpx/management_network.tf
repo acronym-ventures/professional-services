@@ -24,6 +24,7 @@ resource "google_compute_network" "gpu_management_plane" {
 }
 
 resource "google_compute_subnetwork" "gpu_management_plane" {
+  # Drata: Configure [google_compute_subnetwork.log_config] to ensure that security-relevant events are logged to detect malicious activity
   project       = var.project_id
   name          = "gpu-management-plane-${random_id.gpu_management_plane.hex}"
   region        = var.region
@@ -32,6 +33,7 @@ resource "google_compute_subnetwork" "gpu_management_plane" {
 }
 
 resource "google_compute_firewall" "gpu_management_plane-allow-all" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name      = "gpu-management-firewall-allow-all"
   project   = var.project_id
   network   = google_compute_network.gpu_management_plane.name
@@ -52,6 +54,7 @@ resource "google_compute_firewall" "gpu_management_plane-allow-all" {
 }
 
 resource "google_compute_firewall" "gpu_management_plane-allow-icmp" {
+  # Drata: Configure [google_compute_firewall.log_config] to ensure that security-relevant events are logged to detect malicious activity
   name      = "gpu-management-firewall-allow-icmp"
   project   = var.project_id
   network   = google_compute_network.gpu_management_plane.name
@@ -62,4 +65,5 @@ resource "google_compute_firewall" "gpu_management_plane-allow-icmp" {
   }
 
   source_ranges = ["0.0.0.0/0"]
+  # Drata: Ensure that [google_compute_firewall.source_ranges] is explicitly defined and narrowly scoped to only allow traffic from trusted sources
 }

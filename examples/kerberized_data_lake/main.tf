@@ -194,6 +194,8 @@ locals {
 }
 
 resource "google_storage_bucket_object" "static_init_actions" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   for_each = local.static_init_actions
 
   name = "init-actions/${each.key}.sh"
@@ -203,6 +205,8 @@ resource "google_storage_bucket_object" "static_init_actions" {
 }
 
 resource "google_storage_bucket_object" "rendered_init_actions" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   for_each = local.templated_init_actions
 
   name = "init-actions/${each.key}.sh"
@@ -212,6 +216,8 @@ resource "google_storage_bucket_object" "rendered_init_actions" {
 }
 
 resource "google_storage_bucket_object" "shutdown_scripts" {
+  # Drata: Set [google_storage_bucket.versioning.enabled] to [true] to enable infrastructure versioning and prevent accidental deletions and overrides
+  # Drata: Specify [google_storage_bucket.retention_policy.retention_period] to [2678400] to ensure sensitive data is only available when necessary
   for_each = local.shutdown_scripts
 
   name   = "shutdown-scripts/${each.value}"
